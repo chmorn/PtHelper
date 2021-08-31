@@ -1,0 +1,92 @@
+root {
+    display: block;
+}
+
+.root {
+     -fx-background-image: url("background.png");
+}
+
+/*#time-text {
+    -fx-font-size: 18px;
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}*/
+
+/*#m3u8-url-text {
+    -fx-pref-width: 500;
+}*/
+
+#m3u8-label {
+    -fx-alignment: "CENTER_RIGHT";
+    -fx-padding: 5px 5px 5px 5px;
+    -fx-pref-width: 100px;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+#directory-textfield{
+    -fx-content-display: true;
+}
+/*下拉框主体*/
+/*#m3u8box{
+    -fx-min-width: 500px;
+    -fx-min-height: 30;
+    -fx-border-width: 1px;    !**边框宽度*!
+    -fx-background-radius: 15px; !**圆角 *!
+    -fx-border-color: rgb(179,206,251); !**边框颜色 *!
+    -fx-background-color: #ffffff; !**背景颜色 *!
+    -fx-mark-color: green ;	!**下拉框箭头颜色和选中后前面√颜色 *!
+    -fx-font-size: 12px;	!**字体大小 *!
+}
+!*下拉框*!
+#m3u8box .context-menu{
+    -fx-min-width: 500px;
+    -fx-fill-width: 500px;
+    -fx-fit-to-width: 500px;
+    -fx-tab-min-width: 500px;
+    -fx-font-size: 12px;
+    !*-fx-background-radius: 15px;*! !**圆角 *!
+}*/
+/*选中颜色*/
+/*#m3u8box .menu-item:focused{
+    -fx-background-color: yellow ;
+}*/
+
+/*中间的过度的横线*/
+#link-top {
+    -fx-padding: 5px 0px 5px 0px;
+}
+
+/*画一条再右边的竖线*/
+/*#link-right {
+    width: 50px;
+    height: 100%;
+    border-right: solid #000000 2px;
+}*/
+
+/*#welcome-text {
+   -fx-font-size: 32px;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}*/
+
+/*
+#actiontarget {
+  -fx-fill: FIREBRICK;
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );  
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}*/

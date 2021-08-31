@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<GridPane fx:controller="fxmlexample.FXMLExampleController"
+          xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" hgap="10" vgap="10"
+          styleClass="root" >
+  <padding><Insets top="5" right="5" bottom="5" left="5" /></padding>
+
+  <HBox spacing="10" alignment="BOTTOM_CENTER"
+        GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+    <Label text="定时下载" style="-fx-font-size: 18"/>
+  </HBox>
+
+  <Label text="m3u8 url:"
+         GridPane.columnIndex="0" GridPane.rowIndex="1" />
+  <ChoiceBox fx:id="m3u8box" id="m3u8box" visible="true"  prefWidth="500"
+             GridPane.columnIndex="1" GridPane.rowIndex="1">
+    <items>
+      <FXCollections fx:factory="observableArrayList"  >
+        <String fx:value="male" />
+        <String fx:value="female" />
+        <String fx:value="unknownunknownunknownunknownunknownunknown" />
+      </FXCollections>
+    </items>
+  </ChoiceBox>
+  <!--<ChoiceBox fx:id="m3u8box" layoutX="400" layoutY="190" prefWidth="500"
+             GridPane.columnIndex="1" GridPane.rowIndex="1">
+    <items>
+      <FXCollections fx:factory="observableArrayList" >
+        <String fx:value="male" />
+        <String fx:value="female" />
+        <String fx:value="unknownunknownunknownunknownunknownunknown" />
+      </FXCollections>
+    </items>
+  </ChoiceBox>-->
+  <!--<TextField id="m3u8-url-text"
+          GridPane.columnIndex="1" GridPane.rowIndex="1" />-->
+
+  <Label text="下载目录:"
+         GridPane.columnIndex="0" GridPane.rowIndex="2" />
+  <TextField id="m3u8-url-text"
+             GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+  <Label text="开始时间:"
+         GridPane.columnIndex="0" GridPane.rowIndex="3" />
+  <TextField id="m3u8-url-text"
+             GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+  <Label text="结束时间:"
+         GridPane.columnIndex="0" GridPane.rowIndex="4" />
+  <TextField id="m3u8-url-text"
+             GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+  <HBox spacing="10" alignment="BOTTOM_CENTER"
+        GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2">
+    <Button text="确定"
+            onAction="#handleSubmitButtonAction" />
+  </HBox>
+
+  <Separator id="link-top" GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2"/>
+
+
+  <stylesheets>
+    <URL value="@Login.css" />
+  </stylesheets>
+
+</GridPane>
+        <!--<GridPane fx:controller="fxmlexample.FXMLExampleController"
+                  xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
+                  styleClass="root">
+          <padding><Insets top="25" right="25" bottom="10" left="25" /></padding>
+
+          <Text id="welcome-text" text="Welcome"
+              GridPane.columnIndex="0" GridPane.rowIndex="0"
+              GridPane.columnSpan="2"/>
+
+          <Label text="User Name:"
+              GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+          <TextField
+              GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+          <Label text="Password:"
+              GridPane.columnIndex="0" GridPane.rowIndex="2" />
+
+          <PasswordField fx:id="passwordField"
+              GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+          <HBox spacing="10" alignment="bottom_right"
+              GridPane.columnIndex="1" GridPane.rowIndex="4">
+              <Button text="Sign In"
+               onAction="#handleSubmitButtonAction" />
+          </HBox>
+
+          <Text fx:id="actiontarget"
+              GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+
+          <stylesheets>
+            <URL value="@Login.css" />
+          </stylesheets>
+
+        </GridPane>-->

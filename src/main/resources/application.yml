@@ -1,0 +1,47 @@
+server:
+  # 服务器端口
+  port: 9001
+  servlet:
+    # 应用访问路径
+    context-path: /
+  tomcat:
+    # tomcat编码
+    uri-encoding: utf-8
+    threads:
+      # 最大线程数
+      max: 100
+      # tomcat 启动初始化线程数
+      min-spare: 10
+spring:
+  application:
+    name: cms-api
+
+# 日志配置
+logging:
+  level:
+    com.chmorn: debug
+    com.browniebytes: debug
+    org.springframework: info
+  file:
+    name: logs/download.log
+
+app:
+  video:
+    qq:
+      qqPath: D:/iqyvideo/qqvideo/
+    iptv:
+      hntv:
+        hnPath: D:/iptv/hntv/
+        hnPathHign: D:/iptv/hntv_high/
+    ffmpegPath: D:/tools/ffmpeg/bin/ffmpeg.exe
+    nodePath: D:/tools/nodejs/node-v12.16.2-win-x64/node.exe
+    maxThreads: 4
+
+http_pool:
+  max_total: 200
+  default_max_per_route: 100
+  connect_timeout: 5000
+  connection_request_timeout: 1000
+  socket_timeout: 65000
+  validate_after_inactivity: 2000
+
