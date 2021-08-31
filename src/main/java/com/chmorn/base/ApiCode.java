@@ -10,6 +10,7 @@ package com.chmorn.base;
 public enum ApiCode {
     SUCC("0000","操作成功"),
     FAIL("0001","操作失败"),
+    PARAM_ERROR("0010","参数错误"),
     URL_ERROR("0043","连接异常"),
     URL_TIMEOUT("0044","连接超时"),
     OTHER("other","其他异常");

@@ -3,6 +3,8 @@ package com.chmorn.controller;
 import com.chmorn.base.ApiCode;
 import com.chmorn.base.ApiResult;
 import com.chmorn.config.GlobalConfig;
+import com.chmorn.entity.DoubanEntity;
+import com.chmorn.service.DoubanService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -38,13 +40,25 @@ public class DoubanController {
 
     private static Logger logger = LoggerFactory.getLogger(DoubanController.class);
 
-    @PostMapping(value = "/genInfo")
+    @Autowired
+    private DoubanService doubanService;
+
+    @PostMapping(value = "/genDoubanInfo")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "requrl",value = "豆瓣电影地址",required = true,dataType = "String")
+            @ApiImplicitParam(name = "doubanId",value = "豆瓣编号",required = true,dataType = "String")
             //,example = "http://183.207.248.142/ott.js.chinamobile.com/PLTV/3/224/3221227467/index.m3u8"
     })
-    @ApiOperation(value = "定时下载",notes = "定时下载")
-    public synchronized ApiResult genInfo(String requrl) throws InterruptedException {
+    @ApiOperation(value = "获取简介",notes = "获取简介")
+    public synchronized ApiResult genDoubanInfo(String doubanId) throws InterruptedException {
+        if (StringUtils.isEmpty(doubanId)){
+            return ApiResult.result(ApiCode.PARAM_ERROR);
+        }
+        DoubanEntity entity = doubanService.getDoubanInfo(doubanId);
+        if (entity == null){
+            //数据库没有，则去豆瓣查询
+        }else{
+            //用数据库数据生成
+        }
 
         return ApiResult.result(ApiCode.SUCC );
     }
