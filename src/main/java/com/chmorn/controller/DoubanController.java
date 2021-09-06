@@ -2,29 +2,23 @@ package com.chmorn.controller;
 
 import com.chmorn.base.ApiCode;
 import com.chmorn.base.ApiResult;
-import com.chmorn.config.GlobalConfig;
 import com.chmorn.entity.DoubanEntity;
 import com.chmorn.service.DoubanService;
+import com.chmorn.utils.DoubanUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import net.sf.json.JSONArray;
 import org.apache.commons.lang.StringUtils;
+import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.Date;
 
 /**
  * @author chenxu
@@ -43,30 +37,43 @@ public class DoubanController {
     @Autowired
     private DoubanService doubanService;
 
-    @PostMapping(value = "/genDoubanInfo")
+    @PostMapping(value = "/genDoubanInfo/{doubanId}")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "doubanId",value = "豆瓣编号",required = true,dataType = "String")
+            @ApiImplicitParam(name = "doubanId", value = "豆瓣编号", required = true, dataType = "String")
             //,example = "http://183.207.248.142/ott.js.chinamobile.com/PLTV/3/224/3221227467/index.m3u8"
     })
-    @ApiOperation(value = "获取简介",notes = "获取简介")
+    @ApiOperation(value = "获取简介", notes = "获取简介")
     public synchronized ApiResult genDoubanInfo(String doubanId) throws InterruptedException {
-        if (StringUtils.isEmpty(doubanId)){
-            return ApiResult.result(ApiCode.PARAM_ERROR);
+        if (StringUtils.isEmpty(doubanId)) {
+            return ApiResult.result(ApiCode.PARAM_ERROR, "参数为空，请检查豆瓣编号是否正确");
         }
         DoubanEntity entity = doubanService.getDoubanInfo(doubanId);
-        if (entity == null){
+        if (entity == null) {
             //数据库没有，则去豆瓣查询
-        }else{
-            //用数据库数据生成
+            Document home = DoubanUtils.getDoubanHome(doubanId);
+            if (home == null) {
+                return ApiResult.result(ApiCode.PARAM_ERROR, "未查询到豆瓣信息，请检查豆瓣编号是否正确");
+            }
+            entity = new DoubanEntity();
+            entity.setDoubanId(doubanId);
+            entity.setDoubanUrl("https://movie.douban.com/subject/" + doubanId + "/");
+            entity.setUpdateTime(new Date());
+            //初始化首页信息: 详细信息
+            entity = DoubanUtils.initHomeInfo(entity, home);
+            //初始化获奖信息：获奖
+            entity = DoubanUtils.initAwardsfo(entity, doubanId);
+            //保存数据库
+            doubanService.addDoubanInfo(entity);
         }
+        //使用entity生成信息
 
-        return ApiResult.result(ApiCode.SUCC );
+        return ApiResult.result(ApiCode.SUCC, entity);
     }
 
     /**
      * 校验地址
-    **/
-    private static ApiResult checkDoubanUrl(String requrl){
+     **/
+    private static ApiResult checkDoubanUrl(String requrl) {
         //1、校验时间
         try {
             URL url = new URL(requrl);
@@ -74,10 +81,10 @@ public class DoubanController {
             conn.setUseCaches(false);
             conn.setConnectTimeout(500);
             int status = conn.getResponseCode();
-            if(status!=200){
+            if (status != 200) {
                 return ApiResult.result(ApiCode.URL_TIMEOUT);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ApiResult.result(ApiCode.URL_ERROR);
         }

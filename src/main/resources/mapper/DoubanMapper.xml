@@ -22,9 +22,11 @@
         <result column="lng" jdbcType="VARCHAR" property="lng"/>
         <result column="film_year" jdbcType="VARCHAR" property="filmYear"/>
         <result column="show_time" jdbcType="VARCHAR" property="showTime"/>
+        <result column="season" jdbcType="VARCHAR" property="season"/>
+        <result column="episode" jdbcType="VARCHAR" property="episode"/>
         <result column="film_length" jdbcType="VARCHAR" property="filmLength"/>
         <result column="film_desc" jdbcType="VARCHAR" property="filmDesc"/>
-        <result column="film_label" jdbcType="VARCHAR" property="filmLabel"/>
+        <result column="film_tags" jdbcType="VARCHAR" property="filmTags"/>
         <result column="award" jdbcType="VARCHAR" property="award"/>
         <result column="update_time" jdbcType="DATE" property="updateTime"/>
     </resultMap>
@@ -32,8 +34,8 @@
         douban_id
         ,douban_url,douban_score,banner,name_origin,name_cn,name_alias
         ,imdb,imdb_url,imdb_score,director,scriptwriter,stars,film_type
-        ,website,country,lng,film_year,show_time,film_length,film_desc
-        ,film_label,award,update_time
+        ,website,country,lng,film_year,show_time,season,episode
+        ,film_length,film_desc,film_tags,award,update_time
     </sql>
 
     <select id="getCount" resultType="int">
@@ -48,19 +50,14 @@
         where douban_id = #{doubanId}
     </select>
 
-    <!--    <select id="getApInd" parameterType="com.sunyard.rmis.entity.ApIndicatorEntity" resultType="java.util.Map">
-            select ind_code as indCode,ind_name as indName,ind_desc as indDesc,ind_type as indType,
-                src_tbl as srcTbl,formula,ind_spec as indSpec
-            from ap_indicator
-            <where>
-                1=1
-                <if test="indCode!=null and indCode!=''">
-                    and ind_code = #{indCode}
-                </if>
-                <if test="indName!=null and indName!=''">
-                    and ind_name like '%${indName}%'
-                </if>
-            </where>
-        </select>-->
+    <insert id="addDoubanInfo">
+        insert into douban
+        (<include refid="Base_Column_List"/>)
+        value
+        (#{doubanId},#{doubanUrl},#{doubanScore},#{banner},#{nameOrigin},#{nameCn},#{nameAlias}
+        ,#{imdb},#{imdbUrl},#{imdbScore},#{director},#{scriptwriter},#{stars},#{filmType}
+        ,#{website},#{country},#{lng},#{filmYear},#{showTime},#{season},#{episode}
+        ,#{filmLength},#{filmDesc},#{filmTags},#{award},#{updateTime})
+    </insert>
 
 </mapper>

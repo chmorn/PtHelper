@@ -20,16 +20,17 @@ public class DoubanEntity {
     private String stars; //主演
     private String filmType; //类型
     private String website; //官网
-    private String country; //制片国家/地区
+    private String country; //制片国家/地区---产地
     private String lng;  //语言
     private String filmYear; //年份
     private String showTime; //上映日期
+    private String season; //季数
+    private String episode; //集数
     private String filmLength; //片长
     private String filmDesc; //剧情简介
-    private String filmLabel; //标签
+    private String filmTags; //标签
     private String award; //获奖情况
     private Date updateTime; //更新时间
-
 
     public String getDoubanId() {
         return doubanId;
@@ -39,7 +40,6 @@ public class DoubanEntity {
         this.doubanId = doubanId;
     }
 
-
     public String getDoubanUrl() {
         return doubanUrl;
     }
@@ -47,7 +47,6 @@ public class DoubanEntity {
     public void setDoubanUrl(String doubanUrl) {
         this.doubanUrl = doubanUrl;
     }
-
 
     public String getDoubanScore() {
         return doubanScore;
@@ -57,7 +56,6 @@ public class DoubanEntity {
         this.doubanScore = doubanScore;
     }
 
-
     public String getBanner() {
         return banner;
     }
@@ -65,7 +63,6 @@ public class DoubanEntity {
     public void setBanner(String banner) {
         this.banner = banner;
     }
-
 
     public String getNameOrigin() {
         return nameOrigin;
@@ -75,7 +72,6 @@ public class DoubanEntity {
         this.nameOrigin = nameOrigin;
     }
 
-
     public String getNameCn() {
         return nameCn;
     }
@@ -83,7 +79,6 @@ public class DoubanEntity {
     public void setNameCn(String nameCn) {
         this.nameCn = nameCn;
     }
-
 
     public String getNameAlias() {
         return nameAlias;
@@ -93,7 +88,6 @@ public class DoubanEntity {
         this.nameAlias = nameAlias;
     }
 
-
     public String getImdb() {
         return imdb;
     }
@@ -101,7 +95,6 @@ public class DoubanEntity {
     public void setImdb(String imdb) {
         this.imdb = imdb;
     }
-
 
     public String getImdbUrl() {
         return imdbUrl;
@@ -111,7 +104,6 @@ public class DoubanEntity {
         this.imdbUrl = imdbUrl;
     }
 
-
     public String getImdbScore() {
         return imdbScore;
     }
@@ -119,7 +111,6 @@ public class DoubanEntity {
     public void setImdbScore(String imdbScore) {
         this.imdbScore = imdbScore;
     }
-
 
     public String getDirector() {
         return director;
@@ -129,7 +120,6 @@ public class DoubanEntity {
         this.director = director;
     }
 
-
     public String getScriptwriter() {
         return scriptwriter;
     }
@@ -137,7 +127,6 @@ public class DoubanEntity {
     public void setScriptwriter(String scriptwriter) {
         this.scriptwriter = scriptwriter;
     }
-
 
     public String getStars() {
         return stars;
@@ -147,7 +136,6 @@ public class DoubanEntity {
         this.stars = stars;
     }
 
-
     public String getFilmType() {
         return filmType;
     }
@@ -156,7 +144,6 @@ public class DoubanEntity {
         this.filmType = filmType;
     }
 
-
     public String getWebsite() {
         return website;
     }
@@ -164,7 +151,6 @@ public class DoubanEntity {
     public void setWebsite(String website) {
         this.website = website;
     }
-
 
     public String getCountry() {
         return country;
@@ -190,7 +176,6 @@ public class DoubanEntity {
         this.filmYear = filmYear;
     }
 
-
     public String getShowTime() {
         return showTime;
     }
@@ -199,6 +184,21 @@ public class DoubanEntity {
         this.showTime = showTime;
     }
 
+    public String getSeason() {
+        return season;
+    }
+
+    public void setSeason(String season) {
+        this.season = season;
+    }
+
+    public String getEpisode() {
+        return episode;
+    }
+
+    public void setEpisode(String episode) {
+        this.episode = episode;
+    }
 
     public String getFilmLength() {
         return filmLength;
@@ -208,7 +208,6 @@ public class DoubanEntity {
         this.filmLength = filmLength;
     }
 
-
     public String getFilmDesc() {
         return filmDesc;
     }
@@ -217,15 +216,13 @@ public class DoubanEntity {
         this.filmDesc = filmDesc;
     }
 
-
-    public String getFilmLabel() {
-        return filmLabel;
+    public String getFilmTags() {
+        return filmTags;
     }
 
-    public void setFilmLabel(String filmLabel) {
-        this.filmLabel = filmLabel;
+    public void setFilmTags(String filmTags) {
+        this.filmTags = filmTags;
     }
-
 
     public String getAward() {
         return award;
@@ -246,7 +243,7 @@ public class DoubanEntity {
     @Override
     public String toString() {
         return "DoubanEntity{" +
-                "doubanId=" + doubanId +
+                "doubanId='" + doubanId + '\'' +
                 ", doubanUrl='" + doubanUrl + '\'' +
                 ", doubanScore='" + doubanScore + '\'' +
                 ", banner='" + banner + '\'' +
@@ -265,9 +262,11 @@ public class DoubanEntity {
                 ", lng='" + lng + '\'' +
                 ", filmYear='" + filmYear + '\'' +
                 ", showTime='" + showTime + '\'' +
+                ", season='" + season + '\'' +
+                ", episode='" + episode + '\'' +
                 ", filmLength='" + filmLength + '\'' +
                 ", filmDesc='" + filmDesc + '\'' +
-                ", filmLabel='" + filmLabel + '\'' +
+                ", filmTags='" + filmTags + '\'' +
                 ", award='" + award + '\'' +
                 ", updateTime=" + updateTime +
                 '}';

@@ -2,9 +2,11 @@ package com.chmorn;
 
 import com.chmorn.entity.DoubanEntity;
 import com.chmorn.mapper.DoubanMapper;
-import org.apache.ibatis.type.JdbcType;
+import org.apache.http.HttpRequest;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -12,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
+import java.net.HttpURLConnection;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,21 +38,7 @@ public class PtHelperApplicationTest {
 
     @Test
     public void testDouban(){
-//        int cn = doubanMapper.getCount();
-//        System.out.println(cn);
-        DoubanEntity entity = doubanMapper.getDoubanInfo("1");
-        System.out.println(entity);
-//        Map<String, String> headers = new HashMap<String, String>();
-//        headers.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36");
-//        headers.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-//        Document res = null;
-//        String tmpurl = "https://movie.douban.com/subject/1292063/edit";
-//        try {
-//            res = Jsoup.connect(tmpurl).headers(headers).ignoreContentType(true).get();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        String body = res.body().html();
-//        System.out.println(body);
+
     }
+
 }

@@ -27,4 +27,9 @@ public class DoubanServiceImpl implements DoubanService {
     public DoubanEntity getDoubanInfo(String doubanId) {
         return doubanMapper.getDoubanInfo(doubanId);
     }
+
+    @Override
+    public void addDoubanInfo(DoubanEntity entity) {
+        doubanMapper.addDoubanInfo(entity);
+    }
 }
