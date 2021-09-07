@@ -7,6 +7,7 @@ import com.chmorn.utils.PtUtils;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,24 +29,28 @@ public class WebController {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String doubanInfoUrlPre = "http://localhost:9001/douban/genDoubanInfo/";
+    @Value("${server.port}")
+    private String port;
+
+    private String doubanInfoUrlPre = "http://localhost:port/douban/genDoubanInfo/";
 
     //页面
-    @RequestMapping(value = "/douban")
-    public String douban() {
-        return "douban";
-    }
-
-    @RequestMapping(value = "/douban2")
-    public ModelAndView douban2() {
-        //return "douban.html";
-        ModelAndView mav = new ModelAndView("douban");
-        return mav;
-    }
+//    @RequestMapping(value = "/douban")
+//    public String douban() {
+//        return "/douban.html";
+//    }
+//
+//    @RequestMapping(value = "/douban2")
+//    public ModelAndView douban2() {
+//        //return "douban.html";
+//        ModelAndView mav = new ModelAndView("/douban.html");
+//        return mav;
+//    }
 
     @GetMapping(value = "/genDoubanInfo/{doubanId}")
     @ResponseBody
     public ApiResult doubanInfo(@PathVariable("doubanId") String doubanId) {
+        doubanInfoUrlPre = doubanInfoUrlPre.replace("port",port);
         String url = doubanInfoUrlPre + doubanId;
         ApiResult apiResult = restTemplate.getForObject(url, ApiResult.class);
         StringBuffer info = new StringBuffer("");
