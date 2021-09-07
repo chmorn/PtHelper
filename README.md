@@ -1,6 +1,7 @@
 # PtHelper
 1、根据豆瓣编号查询电影/电视剧/动漫/纪录片简介信息 </br>
 2、根据豆瓣编号查询IMDB评分（如果豆瓣维护了IMDB编号）</br>
+3、数据库：mysql，先根据豆瓣编号查询数据库有没有记录，如果有，根据数据库数据返回简介，如果没有，查询豆瓣并且落地数据库。<br>
 </br>
 # 格式如下：
 [img]https://img2.doubanio.com/view/photo/l_ratio_poster/public/p2578474613.jpg[/img]</br>
