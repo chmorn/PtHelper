@@ -37,13 +37,13 @@ public class DoubanController {
     @Autowired
     private DoubanService doubanService;
 
-    @PostMapping(value = "/genDoubanInfo/{doubanId}")
+    @GetMapping(value = "/genDoubanInfo/{doubanId}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "doubanId", value = "豆瓣编号", required = true, dataType = "String")
             //,example = "http://183.207.248.142/ott.js.chinamobile.com/PLTV/3/224/3221227467/index.m3u8"
     })
     @ApiOperation(value = "获取简介", notes = "获取简介")
-    public synchronized ApiResult genDoubanInfo(String doubanId) throws InterruptedException {
+    public synchronized ApiResult genDoubanInfo(@PathVariable("doubanId") String doubanId) throws InterruptedException {
         if (StringUtils.isEmpty(doubanId)) {
             return ApiResult.result(ApiCode.PARAM_ERROR, "参数为空，请检查豆瓣编号是否正确");
         }

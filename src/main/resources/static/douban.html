@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="PT Gen | 电影、动漫、游戏简介生成工具，根据豆瓣编号自动生成简介">
+    <meta name="keywords" content="电影查询 电影简介生成 电影介绍生成 豆瓣简介 游戏简介生成">
+    <meta name="author" content="BFDZ">
+
+    <title>豆瓣简介生成</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
+
+    <style type="text/css">
+        body {
+            padding-top: 50px
+        }
+
+        .navbar-fixed-top {
+            border: 0
+        }
+
+        .main {
+            padding: 20px;
+            margin-top: 0
+        }
+
+        @media (min-width: 768px) {
+            .main {
+                padding-right: 40px;
+                padding-left: 40px
+            }
+        }
+
+        #input_value {
+            width: 400px
+        }
+
+        .zero-clipboard {
+            position: relative
+        }
+
+        .btn-clipboard {
+            position: absolute;
+            top: 8px;
+            right: 21px;
+            z-index: 10;
+            display: block;
+            padding: 5px 8px;
+            font-size: 12px;
+            color: #767676;
+            cursor: pointer;
+            background-color: #fff;
+            border: 1px solid #e1e1e8;
+            border-radius: 0 4px 0 4px
+        }
+
+    </style>
+</head>
+<body>
+<div class="container-fluid main" style="background-color: #f4f4f4;">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="input_value">Input value</label>
+                        <input type="text" class="form-control"
+                               placeholder="豆瓣编号" id="input_value"
+                               style="width: 480px">
+                    </div>
+                    <button class="btn btn-success" id="query_btn">查询</button>
+                </div>
+            </div>
+            <hr>
+            <div id="gen_help" style="display: none"></div>
+            <div id="gen_out">
+                <div class="zero-clipboard">
+                    <button class="btn btn-clipboard" data-clipboard-target="#movie_info">复制</button>
+                </div>
+                <textarea class="form-control" rows="22" id="movie_info"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./js/analytics.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/clipboard.min.js"></script>
+<script>
+    // 脚本查询相关
+    $(function () {
+        let query_btn = $("#query_btn");
+        let movie_info = $("#movie_info");
+        let input_btn = $("#input_value");
+        let search_source = $("#search_source");
+
+        input_btn.on('input change', function () {
+            let input_value = input_btn.val();
+            if (/^http/.test(input_value) || input_value === '') {
+                search_source.hideBtn();
+            } else {
+                search_source.showBtn();
+            }
+        });
+
+        search_source.showBtn = function () {
+            query_btn.html("搜索");
+            search_source.show();
+            input_btn.css({width: '460px'});
+        }
+
+        search_source.hideBtn = function () {
+            query_btn.html("查询");
+            search_source.hide();
+            input_btn.css({width: '480px'});
+        }
+
+        query_btn.disable = function () {
+            query_btn.attr("disabled", true);
+            query_btn.html("查询中");
+        };
+
+        query_btn.enable = function () {
+            query_btn.removeAttr("disabled");
+            query_btn.html("查询");
+        };
+
+        query_btn.click(function () {
+            query_btn.disable();
+
+            let input_value = input_btn.val();
+            if (input_value.length === 0) {
+                alert("空字符，请检查输入");
+                query_btn.enable();
+            } else {
+
+                /*$.getJSON('https://api.douban.workers.dev/', {*/
+                $.getJSON('http://localhost:9001/pt/genDoubanInfo/'+input_value, {
+                    //url: input_value
+                }).success(function (data) {
+                    var code =  data.code;
+                    if(code == '0000'){
+                        movie_info.val(data.data);
+                    }else{
+                        movie_info.val(data.msg);
+                    }
+                    //movie_info.val(data["success"] === false ? data["error"] : data["format"]);
+                }).fail(function (jqXHR) {
+                    alert(jqXHR.status === 429 ? 'Met Rate Limit, Retry later~' : "Error occured!");
+                }).complete(function () {
+                    query_btn.enable();
+                });
+            }
+        });
+    });
+
+    // 页面复制相关
+    new ClipboardJS('.btn-clipboard');
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<!--<script async="" src="./js"></script>-->
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-64016301-5');
+</script>
+</body>
+</html>

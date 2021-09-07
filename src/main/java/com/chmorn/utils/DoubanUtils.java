@@ -22,11 +22,13 @@ import java.util.regex.Pattern;
 public class DoubanUtils {
 
     public static void main(String[] args) {
-        String name = "123";
+        /*String name = "123";
         String p = "^[0-9]*$";
         Pattern pattern = Pattern.compile("^[0-9]*$");
         Matcher ma = pattern.matcher(name);
-        System.out.println(ma.matches());
+        System.out.println(ma.matches());*/
+        String url = "https://www.imdb.com/title/tt12525326/";
+        getImdbScore(url);
     }
 
     //获取首页信息
@@ -83,12 +85,12 @@ public class DoubanUtils {
         //info带html标签格式
         String infoSource = content.getElementsByClass("subject clearfix").get(0).getElementById("info").html();
         //decodeInfo不带html格式,比如：导演:罗伯托nnnn编剧:温琴佐/贝尼尼
-        String decodeInfo = Jsoup.parse(infoSource.replaceAll("<br>", "nnnn")).body().text().replaceAll(" ", "");//自定义nnnn代表换行
+        String decodeInfo = Jsoup.parse(infoSource.replaceAll("<br>", "nnnn")).body().text();//自定义nnnn代表换行
         String[] infos = decodeInfo.split("nnnn");
         for (int i = 0; i < infos.length; i++) {
             String[] row = infos[i].split(":");
-            String key = row[0];
-            String value = row[1];
+            String key = row[0].replaceAll(" ", "");
+            String value = row[1].trim();
             if (key.contains("IMDb")) {
                 entity.setImdb(value);
                 entity.setImdbUrl("https://www.imdb.com/title/" + value + "/");
@@ -111,8 +113,8 @@ public class DoubanUtils {
                 entity.setFilmLength(value);
             } else if ("又名".equals(key)) {
                 entity.setNameAlias(value);
-            } else if ("官网".equals(key)) {
-                entity.setWebsite(value);
+            } else if ("官网".equals(key) || "官方网站".equals(key)) {
+                entity.setWebsite(value + ":" + row[2].trim());
             } else if ("集数".equals(key)) {//剧集
                 entity.setEpisode(value);
             } else if ("季数".equals(key)) {//剧集
@@ -158,13 +160,24 @@ public class DoubanUtils {
     }
 
     //获取IMDB评分
+    ////https://www.imdb.com/title/tt0118799/
     public static synchronized String getImdbScore(String imdbUrl) {
         String imdbScore = "";
+        String users = "";
+        Document document = null;
         try {
-            Document document = getJsoupConn(imdbUrl);
-        } catch (Exception e){
-            System.out.println("获取imdb评分失败："+imdbUrl);
-            e.printStackTrace();
+            document = getJsoupConn(imdbUrl);
+
+            Elements tmps = document.getElementsByClass("AggregateRatingButton__RatingScore-sc-1ll29m0-1 iTLWoV");
+            if (tmps == null || tmps.size() == 0){
+                imdbScore = "暂无评分";
+            }else{
+                imdbScore = tmps.get(0).text();
+                users = document.getElementsByClass("AggregateRatingButton__TotalRatingAmount-sc-1ll29m0-3 jkCVKJ").get(0).text();
+                imdbScore = imdbScore + "/10 (" + users + ")";
+            }
+        } catch (Exception e) {
+            System.out.println("获取imdb评分失败：" + imdbUrl);
         }
         return imdbScore;
     }
@@ -177,10 +190,12 @@ public class DoubanUtils {
         try {
             res = Jsoup.connect(url).headers(headers).ignoreContentType(true).get();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("连接失败：" + url);
+            //e.printStackTrace();
         }
         //String body = res.body().html();
         return res;
     }
+
 
 }
