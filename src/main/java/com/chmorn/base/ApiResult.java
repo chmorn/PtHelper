@@ -1,8 +1,5 @@
 package com.chmorn.base;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 /**
  * @author chenxu
  * @version 1.0
@@ -10,16 +7,15 @@ import io.swagger.annotations.ApiModelProperty;
  * @description 用于controller返回数据
  * @date 2021/7/6
  **/
-@ApiModel("返回类ApiResult")
 public class ApiResult {
 
-    @ApiModelProperty("返回码：0000成功码，其他错误码")
+    //返回码：0000成功码，其他错误码")
     private String code;
 
-    @ApiModelProperty("返回信息")
+    //返回信息")
     private String msg;
 
-    @ApiModelProperty("交易成功返回数据")
+    //"交易成功返回数据")
     private Object data;
 
     private ApiResult(){

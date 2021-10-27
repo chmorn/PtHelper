@@ -7,12 +7,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mybatis.spring.annotation.MapperScan;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+//import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.*;
 import java.net.URL;
@@ -26,17 +26,17 @@ import java.util.Map;
  * @author chenxu
  * @version 1.0
  * @className PtHelperApplicationTest
- * @description TODO
+ * @description TODO258369
  * @date 2021/8/31
  **/
-@SpringBootTest
-@RunWith(SpringRunner.class)
+//@SpringBootTest
+//@RunWith(SpringRunner.class)
 public class PtHelperApplicationTest {
 
     @Autowired
     DoubanMapper doubanMapper;
 
-    @Test
+    //@Test
     public void testDouban(){
 
     }

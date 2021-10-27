@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author chenxu
@@ -17,7 +16,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @date 2021/8/30
  **/
 @SpringBootApplication
-//@EnableSwagger2
 public class PtHelperApplication {
     private static Logger logger = LoggerFactory.getLogger(PtHelperApplication.class);
 

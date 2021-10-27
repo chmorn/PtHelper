@@ -114,7 +114,11 @@ public class DoubanUtils {
             } else if ("又名".equals(key)) {
                 entity.setNameAlias(value);
             } else if ("官网".equals(key) || "官方网站".equals(key)) {
-                entity.setWebsite(value + ":" + row[2].trim());
+                if (row.length == 2) {
+                    entity.setWebsite(value);
+                } else if (row.length == 3) {
+                    entity.setWebsite(value + ":" + row[2].trim());
+                }
             } else if ("集数".equals(key)) {//剧集
                 entity.setEpisode(value);
             } else if ("季数".equals(key)) {//剧集
@@ -169,9 +173,9 @@ public class DoubanUtils {
             document = getJsoupConn(imdbUrl);
 
             Elements tmps = document.getElementsByClass("AggregateRatingButton__RatingScore-sc-1ll29m0-1 iTLWoV");
-            if (tmps == null || tmps.size() == 0){
+            if (tmps == null || tmps.size() == 0) {
                 imdbScore = "暂无评分";
-            }else{
+            } else {
                 imdbScore = tmps.get(0).text();
                 users = document.getElementsByClass("AggregateRatingButton__TotalRatingAmount-sc-1ll29m0-3 jkCVKJ").get(0).text();
                 imdbScore = imdbScore + "/10 (" + users + ")";

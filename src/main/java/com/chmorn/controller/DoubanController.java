@@ -5,10 +5,6 @@ import com.chmorn.base.ApiResult;
 import com.chmorn.entity.DoubanEntity;
 import com.chmorn.service.DoubanService;
 import com.chmorn.utils.DoubanUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
@@ -28,7 +24,6 @@ import java.util.Date;
  * @date 2021/8/30
  **/
 @RestController
-@Api(tags = "DoubanController")
 @RequestMapping(value = "/douban")
 public class DoubanController {
 
@@ -37,17 +32,14 @@ public class DoubanController {
     @Autowired
     private DoubanService doubanService;
 
+    //获取简介
     @GetMapping(value = "/genDoubanInfo/{doubanId}")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "doubanId", value = "豆瓣编号", required = true, dataType = "String")
-            //,example = "http://183.207.248.142/ott.js.chinamobile.com/PLTV/3/224/3221227467/index.m3u8"
-    })
-    @ApiOperation(value = "获取简介", notes = "获取简介")
     public synchronized ApiResult genDoubanInfo(@PathVariable("doubanId") String doubanId) throws InterruptedException {
         if (StringUtils.isEmpty(doubanId)) {
             return ApiResult.result(ApiCode.PARAM_ERROR, "参数为空，请检查豆瓣编号是否正确");
         }
-        DoubanEntity entity = doubanService.getDoubanInfo(doubanId);
+        //DoubanEntity entity = doubanService.getDoubanInfo(doubanId);
+        DoubanEntity entity = null;
         if (entity == null) {
             //数据库没有，则去豆瓣查询
             Document home = DoubanUtils.getDoubanHome(doubanId);
@@ -63,7 +55,7 @@ public class DoubanController {
             //初始化获奖信息：获奖
             entity = DoubanUtils.initAwardsfo(entity, doubanId);
             //保存数据库
-            doubanService.addDoubanInfo(entity);
+            //doubanService.addDoubanInfo(entity);
         }
         //使用entity生成信息
 

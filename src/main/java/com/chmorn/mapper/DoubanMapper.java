@@ -1,8 +1,9 @@
 package com.chmorn.mapper;
 
 import com.chmorn.entity.DoubanEntity;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+//import org.apache.ibatis.annotations.Mapper;
+//import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ import java.util.List;
  * @description TODO
  * @date 2021/8/31
  **/
-@Mapper
+//@Mapper
+@Repository
 public interface DoubanMapper {
 
     /**
@@ -27,7 +29,7 @@ public interface DoubanMapper {
      * @author chenxu
      * @date 2021/8/31
      **/
-    DoubanEntity getDoubanInfo(@Param("doubanId") String doubanId);
+    DoubanEntity getDoubanInfo(/*@Param("doubanId")*/ String doubanId);
     /**
      * 新增信息
      * @author chenxu

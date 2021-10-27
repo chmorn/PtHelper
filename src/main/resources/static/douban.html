@@ -4,9 +4,9 @@
     <meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="PT Gen | 电影、动漫、游戏简介生成工具，根据豆瓣编号自动生成简介">
+    <meta name="description" content="PT Gen | 根据豆瓣编号自动生成简介">
     <meta name="keywords" content="电影查询 电影简介生成 电影介绍生成 豆瓣简介 游戏简介生成">
-    <meta name="author" content="BFDZ">
+    <meta name="author" content="chmorn">
 
     <title>豆瓣简介生成</title>
 
@@ -77,7 +77,6 @@
                 </div>
             </div>
             <hr>
-            <div id="gen_help" style="display: none"></div>
             <div id="gen_out">
                 <div class="zero-clipboard">
                     <button class="btn btn-clipboard" data-clipboard-target="#movie_info">复制</button>
@@ -97,16 +96,7 @@
         let query_btn = $("#query_btn");
         let movie_info = $("#movie_info");
         let input_btn = $("#input_value");
-        let search_source = $("#search_source");
-
-        input_btn.on('input change', function () {
-            let input_value = input_btn.val();
-            if (/^http/.test(input_value) || input_value === '') {
-                search_source.hideBtn();
-            } else {
-                search_source.showBtn();
-            }
-        });
+        /*let search_source = $("#search_source");
 
         search_source.showBtn = function () {
             query_btn.html("搜索");
@@ -118,7 +108,7 @@
             query_btn.html("查询");
             search_source.hide();
             input_btn.css({width: '480px'});
-        }
+        }*/
 
         query_btn.disable = function () {
             query_btn.attr("disabled", true);

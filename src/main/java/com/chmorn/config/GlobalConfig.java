@@ -11,16 +11,16 @@ import org.springframework.stereotype.Component;
  * @description 读取配置文件自定义属性
  * @date 2021/7/21
  **/
-@Component
+//@Component
 //@ConfigurationProperties(prefix = "app.video")
 public class GlobalConfig {
-    @Value("${app.video.qq.qqPath}")
+    //@Value("${app.video.qq.qqPath}")
     private String qqPath;
-    @Value("${app.video.ffmpegPath}")
+    //@Value("${app.video.ffmpegPath}")
     private String ffmpegPath;
-    @Value("${app.video.nodePath}")
+    //@Value("${app.video.nodePath}")
     private String nodePath;
-    @Value("${app.video.maxThreads}")
+    //@Value("${app.video.maxThreads}")
     private int maxThreads;
 
     public String getQqPath() {

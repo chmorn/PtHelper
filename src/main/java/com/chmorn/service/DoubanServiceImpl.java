@@ -15,21 +15,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class DoubanServiceImpl implements DoubanService {
 
-    @Autowired
-    private DoubanMapper doubanMapper;
+    //@Autowired
+    //private DoubanMapper doubanMapper;
 
     @Override
     public int getCount() {
-        return doubanMapper.getCount();
+        return 0;
+        //return doubanMapper.getCount();
     }
 
     @Override
     public DoubanEntity getDoubanInfo(String doubanId) {
-        return doubanMapper.getDoubanInfo(doubanId);
+        return null;
+        //return doubanMapper.getDoubanInfo(doubanId);
     }
 
     @Override
     public void addDoubanInfo(DoubanEntity entity) {
-        doubanMapper.addDoubanInfo(entity);
+        //doubanMapper.addDoubanInfo(entity);
     }
 }
