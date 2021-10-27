@@ -82,7 +82,7 @@ public class HttpPostUtil implements Serializable {
         try {
         	post.addHeader("accept", "application/json, text/javascript, */*; q=0.01");
         	post.addHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36");
-        	post.addHeader("cookie", "pgv_pvi=7519770624; pgv_pvid=8084283636; RK=9MQcqciGGL; ptcz=b257d68bc7f48ee232055a4cc677cf5e3e42fce18bd9e3ea44c8d67129c31246; eas_sid=U1L6x116q2C2o7Z5d021m7z9t7; tvfe_boss_uuid=264b1c7d91a72c1d; appuser=7DBB9DBE94FF9421; LZTturn=325; ufc=r24_1_1626796159_1626709939; pgv_info=ssid=s9037600415; LPPBturn=610; LPSJturn=397; LZIturn=840; LVINturn=859; LPHLSturn=353; LPDFturn=39; lv_play_index=39; o_minduid=");
+        	post.addHeader("cookie", "");
             StringEntity string = new StringEntity(json.toString(),CHAR_SET);
             string.setContentEncoding(CHAR_SET);
             string.setContentType(CONTENT_TYPE);
